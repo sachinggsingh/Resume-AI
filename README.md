@@ -1,36 +1,121 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧠 Resume-AI
 
-## Getting Started
+Resume-AI is an AI-powered resume analyzer built with **Next.js** and **Google Gemini API**, which evaluates resumes based on **ATS (Applicant Tracking System)** standards. It extracts the resume content from PDFs, converts them into images via **Cloudinary**, and then generates smart suggestions and scores using Gemini's LLM.
 
-First, run the development server:
+![Resume AI Preview](public/demo-preview.png) <!-- Optional: Add your own image here -->
 
-```bash
+## 🚀 Features
+
+- 📄 **PDF to Image Conversion** using Cloudinary  
+- 🧠 **Resume Analysis with Gemini API (Google Generative AI)**  
+- 📊 **ATS Score Calculation** with improvement suggestions  
+- 🔍 **Job-based Matching** using job title input  
+- 🌙 **Responsive Dark Mode UI** with Tailwind CSS  
+- ⚙️ Built with Next.js App Router, TypeScript, and ShadCN UI  
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** Next.js 14, TypeScript, Tailwind CSS, ShadCN UI  
+- **AI Integration:** Google Gemini API  
+- **Media Handling:** Cloudinary (PDF to JPG conversion)  
+- **Deployment:** Vercel  
+
+---
+
+## 🧑‍💻 Getting Started
+
+### 1. Clone the Repository
+
+\`\`\`bash
+git clone https://github.com/sachinggsingh/Resume-AI.git
+cd Resume-AI
+\`\`\`
+
+### 2. Install Dependencies
+
+\`\`\`bash
+npm install
+# or
+yarn
+\`\`\`
+
+### 3. Set Up Environment Variables
+
+Create a `.env.local` file in the root directory:
+
+\`\`\`env
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+GEMINI_API_KEY=your_google_generative_ai_key
+\`\`\`
+
+### 4. Run the Dev Server
+
+\`\`\`bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+\`\`\`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🧪 How It Works
 
-## Learn More
+1. **Upload Resume (PDF):** Users upload their resume.  
+2. **Cloudinary Conversion:** Resume is converted to a JPG (1st page only).  
+3. **Gemini Prompting:** Image and job title are sent to the Gemini API.  
+4. **AI Response:** Gemini returns ATS score, recommendations, and keyword analysis.  
+5. **UI Rendering:** Summary and ATS insights are rendered dynamically.  
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📦 Folder Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+\`\`\`bash
+/app
+  ├── api/summary         # API Route to communicate with Gemini
+  ├── components/         # UI Components
+  ├── lib/                # Utility functions
+  └── page.tsx            # Main Upload and Summary UI
+\`\`\`
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📄 Gemini Prompt Sample
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+> "You are an ATS evaluator. Analyze this resume for the role of ‘Frontend Developer’. Return structured JSON with fields: atsScore, recommendations, keywordAnalysis, and overallAssessment."
+
+---
+
+## 📤 Deploy on Vercel
+
+You can deploy this project instantly on [Vercel](https://vercel.com):
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/sachinggsingh/Resume-AI)
+
+---
+
+## 📚 Resources
+
+- [Next.js Documentation](https://nextjs.org/docs)  
+- [Cloudinary Docs](https://cloudinary.com/documentation)  
+- [Google Generative AI (Gemini)](https://ai.google.dev/)  
+- [ShadCN UI](https://ui.shadcn.com/)  
+
+---
+
+## 📬 Contact
+
+Built by [Sachin Singh](https://github.com/sachinggsingh)  
+📧 [sachingajendrasingh@gmail.com](mailto:sachingajendrasingh@gmail.com)
+
+---
+
+## ⭐️ Give a Star
+
+If you like this project, consider starring it on [GitHub](https://github.com/sachinggsingh/Resume-AI) — it helps others discover it too!
