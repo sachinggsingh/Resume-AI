@@ -5,6 +5,8 @@ export interface User extends Document {
   password?: string; // Optional for OAuth users
   name?: string;
   image?: string;
+  provider?: string; // "google", "credentials", etc.
+  emailVerified?: boolean;
 }
 
 // Updated User schema
@@ -26,6 +28,15 @@ const UserSchema: Schema<User> = new mongoose.Schema({
   image: {
     type: String,
     required: false,
+  },
+  provider: {
+    type: String,
+    required: false,
+    enum: ['google', 'credentials'],
+  },
+  emailVerified: {
+    type: Boolean,
+    default: false,
   },
 });
 

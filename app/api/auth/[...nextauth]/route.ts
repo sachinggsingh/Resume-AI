@@ -1,11 +1,16 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 import connectDB from "@/app/lib/db";
 import UserModel from "@/app/model/User"
 import bcrypt from "bcryptjs";
 
 const handler = NextAuth({
     providers: [
+        GoogleProvider({
+            clientId: process.env.OAUTH_CLIENT_ID!,
+            clientSecret: process.env.OAUTH_CLIENT_SECRET!,
+        }),
         CredentialsProvider({
             name: "Credentials",
             credentials: {
@@ -45,6 +50,32 @@ const handler = NextAuth({
         })
     ],
     callbacks: {
+        async signIn({ user, account, profile }) {
+            if (account?.provider === "google") {
+                await connectDB();
+                try {
+                    // Check if user already exists
+                    const existingUser = await UserModel.findOne({ email: user.email });
+                    
+                    if (!existingUser) {
+                        // Create new user for Google OAuth
+                        const newUser = new UserModel({
+                            email: user.email,
+                            name: user.name,
+                            image: user.image,
+                            provider: "google",
+                            emailVerified: true
+                        });
+                        await newUser.save();
+                    }
+                    return true;
+                } catch (error) {
+                    console.error("Error in signIn callback:", error);
+                    return false;
+                }
+            }
+            return true;
+        },
         async session({ session, token }) {
             if (token) {
                 session.user._id = token._id;
@@ -52,10 +83,18 @@ const handler = NextAuth({
             }
             return session
         },
-        async jwt({ token, user, }) {
+        async jwt({ token, user, account }) {
             if (user) {
                 token._id = user._id;
-                token.email = user.email
+                token.email = user.email;
+            }
+            if (account?.provider === "google") {
+                // Fetch user from database to get _id
+                await connectDB();
+                const dbUser = await UserModel.findOne({ email: token.email });
+                if (dbUser) {
+                    token._id = dbUser._id;
+                }
             }
             return token
         }

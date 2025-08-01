@@ -177,7 +177,24 @@ export default function Page() {
 
   const handleGoogleSignIn = async () => {
     setLoading(true);
-    setError("Google authentication is not configured yet. Please use email/password sign-in.");
+    setError("");
+    setSuccess("");
+    
+    try {
+      const res = await signIn("google", {
+        redirect: false,
+        callbackUrl: "/",
+      });
+      
+      if (res?.error) {
+        setError(res.error || "Google sign-in failed.");
+      } else {
+        setSuccess("Google sign-in successful! Redirecting...");
+        router.push("/");
+      }
+    } catch (error) {
+      setError("Google sign-in failed. Please try again.");
+    }
     setLoading(false);
   };
 
