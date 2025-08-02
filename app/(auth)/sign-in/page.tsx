@@ -193,6 +193,7 @@ export default function Page() {
         router.push("/");
       }
     } catch (error) {
+      console.log('Error:', error);
       setError("Google sign-in failed. Please try again.");
     }
     setLoading(false);
