@@ -249,14 +249,14 @@ export default function Page() {
                 onChange={(e) => setForm({ ...form, password: e.target.value })}
                 required
               />
-              <div className="text-right mt-1">
+              {/* <div className="text-right mt-1">
                 <Link
                   href="/forgot-password"
                   className="text-xs text-muted-foreground hover:text-primary underline"
                 >
                   Forgot password?
                 </Link>
-              </div>
+              </div> */}
             </div>
 
             <div className="flex items-center space-x-2">
