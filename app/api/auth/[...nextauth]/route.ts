@@ -8,8 +8,8 @@ import bcrypt from "bcryptjs";
 const handler = NextAuth({
     providers: [
         GoogleProvider({
-            clientId: process.env.OAUTH_CLIENT_ID!,
-            clientSecret: process.env.OAUTH_CLIENT_SECRET!,
+            clientId: process.env.GOOGLE_CLIENT_ID!,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
         }),
         CredentialsProvider({
             name: "Credentials",
@@ -93,7 +93,7 @@ const handler = NextAuth({
                 await connectDB();
                 const dbUser = await UserModel.findOne({ email: token.email });
                 if (dbUser) {
-                    token._id = dbUser._id;
+                    token._id = dbUser._id as string;
                 }
             }
             return token
