@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { FileUpload } from "@/components/ui/file-upload";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -13,10 +12,11 @@ import {
 } from "@/components/ui/tooltip";
 import { Home, CheckCircle, AlertCircle, LoaderCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function Page() {
   const router = useRouter();
-  const [files, setFiles] = useState<File[]>([]);
+  const [, setFiles] = useState<File[]>([]);
   const [jobTitle, setJobTitle] = useState("");
   const [isUploading, setIsUploading] = useState(false);
   const [uploadStatus, setUploadStatus] = useState<{
@@ -53,7 +53,7 @@ export default function Page() {
           type: 'success',
           message: 'File uploaded successfully!'
         });
-        // Optionally redirect to summary page or show success message
+        // Redirect to summary page
         setTimeout(() => {
           router.push(`/summary?jobTitle=${encodeURIComponent(jobTitle)}`);
         }, 2000);
@@ -102,13 +102,13 @@ export default function Page() {
       <div className="space-y-6 bg-white dark:bg-black p-6 rounded-lg border-none dark:border-neutral-700 shadow-sm">
         {/* Job Position Input */}
         <div className="space-y-2">
-          <Label htmlFor="jobTitle">Job Position</Label>
-          <Input
+          <Label htmlFor="jobTitle">Job Description</Label>
+          <Textarea
             id="jobTitle"
-            placeholder="e.g. Frontend Developer"
+            placeholder="e.g. Frontend Developer, Software Engineer, etc."
             value={jobTitle}
             onChange={(e) => setJobTitle(e.target.value)}
-            className="bg-white dark:bg-neutral-900"
+            className="bg-white dark:bg-neutral-900 w-full min-h-[80px]"
           />
         </div>
 

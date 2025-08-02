@@ -82,9 +82,8 @@ export default function UserAvatar() {
           {session.user?.email || "User"}
         </div>
         <DropdownMenuSeparator />
-        <DropdownMenuSeparator />
         <DropdownMenuItem
-          className="text-red-500 focus:text-red-600 focus:bg-red-50 dark:focus:bg-red-950"
+          className="cursor-pointer hover:bg-red-500 hover:text-white focus:text-red-600 focus:bg-red-50 dark:focus:bg-red-950"
           onClick={handleLogout}
         >
           <LogOut className="w-4 h-4 mr-2" />

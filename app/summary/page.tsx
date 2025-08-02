@@ -34,7 +34,7 @@ export default function Page() {
   const [summary, setSummary] = useState<string | AnalysisData | null>(null);
   const [isStructured, setIsStructured] = useState(false);
 
-  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+  // const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
 
   useEffect(() => {
     const fetchLatestUpload = async () => {
@@ -51,6 +51,7 @@ export default function Page() {
           setError(data.error || 'Failed to fetch latest upload');
         }
       } catch (err) {
+        console.log('Error:', err);
         setError('Network error occurred');
       } finally {
         setLoading(false);
@@ -69,9 +70,9 @@ export default function Page() {
         setError(null);
 
         // Extract public_id from Cloudinary URL
-        const urlParts = pdfUrl.split('/');
-        const publicIdWithExtension = urlParts[urlParts.length - 1];
-        const publicId = publicIdWithExtension.split('.')[0]; // Remove file extension
+        // const urlParts = pdfUrl.split('/');
+        // const publicIdWithExtension = urlParts[urlParts.length - 1];
+        // const publicId = publicIdWithExtension.split('.')[0]; // Remove file extension
 
         // Generate image URLs for each page using Cloudinary transformations
         const imageUrls: string[] = [];
@@ -91,6 +92,7 @@ export default function Page() {
               break;
             }
           } catch (error) {
+            console.log('Error:', error);
             // If there's an error, we've probably reached the end of the PDF
             break;
           }
@@ -102,6 +104,7 @@ export default function Page() {
 
         setImages(imageUrls);
       } catch (err) {
+        console.log('Error:', err);
         setError('Failed to convert PDF to images');
       } finally {
         setConverting(false);
@@ -150,6 +153,7 @@ export default function Page() {
         setSummary(data.summary);
         setIsStructured(data.isStructured || false);
       } catch (err) {
+        console.log('Error:', err);
         setError('Failed to generate summary');
       } finally {
         setLoading(false);
@@ -193,8 +197,8 @@ export default function Page() {
         <p className="text-muted-foreground max-w-md mx-auto">
           The Strength and the Weakness of your resume are as follows
         </p>
-        <p className="text-muted-foreground max-w-md mx-auto">
-          Target Role: <span className="font-semibold">{jobTitle || "Not specified"}</span>
+        <p className="text-muted-foreground max-w-md mx-auto mt-2">
+          <span className="font-bold">Job Description : </span> <span>{jobTitle || "Not specified"}</span>
         </p>
       </div>
 
