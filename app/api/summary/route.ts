@@ -7,14 +7,13 @@ if (!apiKey) {
 }
 
 
-
 export async function POST(req: NextRequest) {
   try {
-    console.log("Received request");
+    // console.log("Received request");
 
     const { cloudinaryUrl, jobTitle } = await req.json();
-    console.log("Received jobTitle:", jobTitle);
-    console.log("Received cloudinaryUrl:", cloudinaryUrl);
+    // console.log("Received jobTitle:", jobTitle);
+    // console.log("Received cloudinaryUrl:", cloudinaryUrl);
 
     if (!cloudinaryUrl || !jobTitle) {
       return NextResponse.json(
@@ -30,7 +29,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    console.log("Processing cloudinaryUrl:", cloudinaryUrl);
+    // console.log("Processing cloudinaryUrl:", cloudinaryUrl);
 
     const genAi = new GoogleGenerativeAI(apiKey as string);
     const model = genAi.getGenerativeModel({ model: "gemini-1.5-flash" });
@@ -128,11 +127,11 @@ IMPORTANT: Return ONLY the JSON object. Nothing else.
       
       try {
         analysisData = JSON.parse(cleanedResponse);
-        console.log("Successfully parsed JSON response");
-        console.log("Parsed data keys:", Object.keys(analysisData));
-        console.log("ATS Score:", analysisData.atsScore);
-        console.log("Keywords Match:", analysisData.keywordsMatch);
-        console.log("Format Score:", analysisData.formatScore);
+        // console.log("Successfully parsed JSON response");
+        // console.log("Parsed data keys:", Object.keys(analysisData));
+        // console.log("ATS Score:", analysisData.atsScore);
+        // console.log("Keywords Match:", analysisData.keywordsMatch);
+        // console.log("Format Score:", analysisData.formatScore);
         
         // Validate that we have the required fields
         if (!analysisData.atsScore || !analysisData.keywordsMatch || !analysisData.formatScore) {
@@ -144,13 +143,13 @@ IMPORTANT: Return ONLY the JSON object. Nothing else.
         }
       } catch (parseError) {
         console.error("Failed to parse JSON response:", parseError);
-        console.log("Raw response:", responseText);
-        console.log("Cleaned response:", cleanedResponse);
+        // console.log("Raw response:", responseText);
+        // console.log("Cleaned response:", cleanedResponse);
         
         // Try one more time with the original response
         try {
           analysisData = JSON.parse(responseText);
-          console.log("Successfully parsed original response");
+          // console.log("Successfully parsed original response");
         } catch (secondParseError) {
           console.error("Second parse attempt failed:", secondParseError);
           
