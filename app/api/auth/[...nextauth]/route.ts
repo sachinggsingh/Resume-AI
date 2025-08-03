@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import connectDB from "@/app/lib/db";
-import UserModel from "@/app/model/User"
+import UserModel from "@/app/model/User";
 import bcrypt from "bcryptjs";
 
 const handler = NextAuth({
@@ -20,6 +20,7 @@ const handler = NextAuth({
             async authorize(credentials: any): Promise<any> {
                 await connectDB();
                 try {
+                    // check if user exists
                     const user = await UserModel.findOne({
                         $or: [
                             { email: credentials.email}

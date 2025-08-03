@@ -15,11 +15,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (!(file instanceof Blob)) {
+    if (!(file instanceof File)) {
       return NextResponse.json(
         { error: "Invalid file type" },
         { status: 400 }
       );
+    }
+    if (file.size >2 * 1024 * 1024) { // 2MB
+      return NextResponse.json({ error: "File too large" }, { status: 400 });
     }
 
     // Validate PDF
@@ -39,8 +42,8 @@ export async function POST(request: NextRequest) {
 
     // Sanitize public ID
     const publicId = filename.replace(/\.[^/.]+$/, "") // remove extension
-                             .replace(/\s+/g, "_")
-                             .toLowerCase();
+      .replace(/\s+/g, "_")
+      .toLowerCase();
 
     const dataOfBase64 = Buffer.from(fileBuffer).toString("base64");
     const pdfUrl = `data:${mimetype};base64,${dataOfBase64}`;
