@@ -52,6 +52,8 @@ Use this exact format and replace the values with your analysis:
   "overallAssessment": "This is a solid resume with good structure and relevant experience. With some keyword optimization and role-specific tailoring, it would perform well in ATS systems."
 }
 
+
+
 IMPORTANT: Return ONLY the JSON object. Nothing else.
 `;
 
