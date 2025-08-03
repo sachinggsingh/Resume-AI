@@ -21,13 +21,13 @@ export default function Navbar() {
         <nav className="hidden md:flex gap-6">
           <Link
             href="/"
-            className="text-sm hover:underline hover:text-primary transition-colors"
+            className="text-lg font-bold  hover:text-primary transition-colors "
           >
             Home
           </Link>
           <Link
             href="/about"
-            className="text-sm hover:underline hover:text-primary transition-colors"
+            className="text-lg font-bold hover:text-primary transition-colors "
           >
             About
           </Link>

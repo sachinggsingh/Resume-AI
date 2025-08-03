@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import { useSession } from 'next-auth/react';
+import ChatBot from '@/components/ChatBot';
 
 export default function Home() {
   const { data: session,  } = useSession()
@@ -12,7 +13,7 @@ export default function Home() {
   return (
     <>
       <Navbar/>
-      <main className="flex flex-col items-center justify-center min-h-[80vh] px-4 text-center">
+      <main className="flex flex-col items-center justify-center min-h-[80vh] px-4 text-center relative">
         {/* Heading */}
         <h1 className="text-4xl md:text-5xl font-bold flex items-center gap-3 mb-4">
           <ScanSearch className="h-8 w-8 text-primary" />
@@ -23,6 +24,7 @@ export default function Home() {
         <p className="text-lg md:text-xl text-muted-foreground max-w-xl mb-8">
           Get AI-powered insights to improve your resume and stand out to recruiters.
         </p>
+       
 
         {/* Buttons */}
         <div className="flex gap-4 flex-wrap justify-center">
@@ -58,6 +60,11 @@ export default function Home() {
           )}
         </div>
       </main>
+      
+      {/* ChatBot positioned in right lower corner */}
+      <div className="fixed bottom-4 right-4 z-50">
+        <ChatBot/>
+      </div>
     </>
   )
 }
