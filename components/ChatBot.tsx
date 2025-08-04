@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { MessageSquare, Send, Bot, User, Loader2 } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 // import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"; // Optional
 
 export default function ChatBot() {
@@ -76,19 +77,18 @@ export default function ChatBot() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        {/* Optional Tooltip around button */}
-        {/* <Tooltip>
-          <TooltipTrigger asChild> */}
+            <Button className="cursor-pointer fixed bottom-4 right-4 z-50 w-14 h-14 rounded-full bg-black text-white dark:bg-white dark:text-black ">
+        <Tooltip>
+          <TooltipTrigger asChild>
           <SheetTitle>
-            <Button className="fixed bottom-4 right-4 z-50 w-14 h-14 rounded-full bg-black text-white dark:bg-white dark:text-black ">
-              <MessageSquare className="w-6 h-6" />
-            </Button>
+              <MessageSquare className=" bg-black dark:bg-white w-6 h-6 text-white dark:text-black" />
           </SheetTitle>
-          {/* </TooltipTrigger>
+          </TooltipTrigger>
           <TooltipContent>
             <p>Chat with Resume Refiner AI</p>
-          </TooltipContent>
-        </Tooltip> */}
+          </TooltipContent> 
+        </Tooltip>
+            </Button>
       </SheetTrigger>
 
       <SheetContent side="right" className="w-80 p-0 flex flex-col bg-white text-black dark:bg-black dark:text-white">

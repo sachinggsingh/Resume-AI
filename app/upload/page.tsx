@@ -20,6 +20,7 @@ export default function Page() {
   const [, setFiles] = useState<File[]>([]);
   const [jobTitle, setJobTitle] = useState("");
   const [isUploading, setIsUploading] = useState(false);
+  const [isSummarizing, setIsSummarizing] = useState(false);
   const [uploadStatus, setUploadStatus] = useState<{
     type: "success" | "error" | null;
     message: string;
@@ -70,7 +71,8 @@ export default function Page() {
       setIsUploading(false);
     }
   };
-  const redirectToSummary = () => {
+  const redirectToSummary = async () => {
+    setIsSummarizing(true);
     // Redirect to summary page
     setTimeout(() => {
       router.push(`/summary?jobTitle=${encodeURIComponent(jobTitle)}`);
@@ -147,8 +149,20 @@ export default function Page() {
           </div>
         )}
         {uploadStatus.type === "success" && (
-          <Button onClick={() => redirectToSummary()}>
-            Summarize the things
+          <Button 
+            className="cursor-pointer" 
+            onClick={() => redirectToSummary()} 
+            disabled={isSummarizing} 
+            variant="default"
+          >
+            {isSummarizing ? (
+              <>
+                <LoaderCircle className="w-4 h-4 animate-spin text-white mr-2" />
+                Summarizing...
+              </>
+            ) : (
+              "Summarize the things"
+            )}
           </Button>
         )}
 

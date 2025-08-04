@@ -40,7 +40,7 @@ export default function SummaryRight({
         <div className="space-y-4">
           {/* ATS Score Card - Big and Prominent */}
           {isStructured && typeof summary === "object" ? (
-            <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl p-6 text-white shadow-xl">
+            <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl p-6 text-white shadow-xl">
               <div className="text-center">
                 <div className="text-4xl font-bold mb-2">
                   {"atsScore" in summary ? summary.atsScore : "N/A"}
@@ -105,7 +105,7 @@ export default function SummaryRight({
           )}
 
           {/* Key Strengths Card */}
-          <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-gray-800 dark:to-gray-700 rounded-xl p-4 shadow-lg border border-green-200 dark:border-gray-600">
+          <div className="bg-gradient-to-br from-blue-400 to-blue-500 dark:from-blue-900 dark:to-blue-800 rounded-xl p-4 shadow-lg ">
             <div className="flex items-center gap-2 mb-3">
               <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
                 <span className="text-white text-xs font-bold">✓</span>
@@ -152,7 +152,7 @@ export default function SummaryRight({
           </div>
 
           {/* Areas for Improvement Card */}
-          <div className="bg-gradient-to-br from-orange-50 to-red-50 dark:from-gray-800 dark:to-gray-700 rounded-xl p-4 shadow-lg border border-orange-200 dark:border-gray-600">
+          <div className="bg-gradient-to-br from-red-400 to-red-500 dark:from-red-900 dark:to-red-800 rounded-xl p-4 shadow-lg ">
             <div className="flex items-center gap-2 mb-3">
               <div className="w-6 h-6 bg-orange-500 rounded-full flex items-center justify-center">
                 <span className="text-white text-xs font-bold">!</span>
@@ -204,7 +204,7 @@ export default function SummaryRight({
           </div>
 
           {/* Recommendations Card */}
-          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 rounded-xl p-4 shadow-lg border border-blue-200 dark:border-gray-600">
+          <div className="bg-gradient-to-br from-green-500 to-green-600 dark:from-green-900 dark:to-green-800 rounded-xl p-4 shadow-lg ">
             <div className="flex items-center gap-2 mb-3">
               <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
                 <span className="text-white text-xs font-bold">💡</span>
@@ -256,7 +256,7 @@ export default function SummaryRight({
           </div>
 
           {/* Raw Analysis Text - Show when structured data is not available */}
-          {!isStructured && typeof summary === "string" && (
+          {/* {!isStructured && typeof summary === "string" && (
             <div className="bg-gradient-to-br from-gray-50 to-slate-100 dark:from-gray-800 dark:to-gray-700 rounded-xl p-4 shadow-lg border border-gray-200 dark:border-gray-600">
               <div className="flex items-center gap-2 mb-3">
                 <div className="w-6 h-6 bg-gray-500 rounded-full flex items-center justify-center">
@@ -270,7 +270,7 @@ export default function SummaryRight({
                 {summary}
               </div>
             </div>
-          )}
+          )} */}
         </div>
       ) : error ? (
         <div className="bg-gradient-to-br from-red-50 to-pink-100 dark:from-gray-900 dark:to-gray-800 rounded-xl border border-red-200 dark:border-gray-700 p-8 shadow-lg">

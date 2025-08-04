@@ -29,6 +29,6 @@ export default function ClientWrapper({
   }
 
   return <SessionProvider>
-    <TooltipProvider>{children}</TooltipProvider>;
+    <TooltipProvider>{children}</TooltipProvider>
   </SessionProvider>
 }

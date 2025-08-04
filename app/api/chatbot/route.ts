@@ -39,7 +39,7 @@ Please provide helpful, professional, and actionable advice. Keep responses conc
 Respond as the Assistant:`;
 
     const result = await model.generateContent(prompt);
-    const response = await result.response;
+    const response =  result.response;
     const text = response.text();
 
     return NextResponse.json({

@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import {
-  ScanSearch,
   Home,
 } from "lucide-react";
 import { useSearchParams } from "next/navigation";
@@ -204,17 +203,28 @@ export default function Page() {
             </TooltipContent>
           </Tooltip>
         </div>
-        <h1 className="text-3xl font-bold mb-2 flex items-center justify-center gap-2">
-          <ScanSearch className="w-6 h-6 text-primary" />
+        <h1 className="text-3xl font-bold mb-2 flex items-center justify-center gap-2 md:text-4xl lg:text-5xl sm:text-2xl text-center text-black dark:text-white">
           Resume Summary Analyzer
         </h1>
         <p className="text-muted-foreground max-w-md mx-auto">
           The Strength and the Weakness of your resume are as follows
         </p>
-        <p className="text-muted-foreground max-w-md mx-auto mt-2">
-          <span className="font-bold">Job Description : </span>{" "}
-          <span>{jobTitle || "Not specified"}</span>
-        </p>
+        <div className="text-muted-foreground max-w-2xl mx-auto mt-2">
+          <span className="font-bold text-xl">Job Description : </span>
+          <br />
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <span 
+                className="inline-block max-w-xs md:max-w-md lg:max-w-lg truncate cursor-pointer"
+              >
+                {jobTitle || "Not specified"}
+              </span>
+            </TooltipTrigger>
+            <TooltipContent side="bottom" className="max-w-xs">
+              <p className="break-words">{jobTitle || "Not specified"}</p>
+            </TooltipContent>
+          </Tooltip>
+        </div>
       </div>
 
       {/* Main Content Grid */}
