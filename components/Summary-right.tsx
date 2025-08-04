@@ -65,17 +65,14 @@ export default function SummaryRight({
                 <div className="flex justify-between items-center text-sm">
                   <span>Keywords Match</span>
                   <span className="font-semibold">
-                    {"keywordsMatch" in summary
-                      ? summary.keywordsMatch
-                      : "N/A"}
+                    {"keywordsMatch" in summary ? summary.keywordsMatch : "N/A"}
                     %
                   </span>
                 </div>
                 <div className="flex justify-between items-center text-sm mt-1">
                   <span>Format Score</span>
                   <span className="font-semibold">
-                    {"formatScore" in summary ? summary.formatScore : "N/A"}
-                    %
+                    {"formatScore" in summary ? summary.formatScore : "N/A"}%
                   </span>
                 </div>
               </div>
@@ -121,19 +118,14 @@ export default function SummaryRight({
               {isStructured &&
               typeof summary === "object" &&
               summary.keyStrengths ? (
-                summary.keyStrengths.map(
-                  (strength: string, index: number) => (
-                    <div
-                      key={index}
-                      className="flex items-center gap-2 text-sm"
-                    >
-                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                      <span className="text-gray-700 dark:text-gray-300">
-                        {strength}
-                      </span>
-                    </div>
-                  )
-                )
+                summary.keyStrengths.map((strength: string, index: number) => (
+                  <div key={index} className="flex items-center gap-2 text-sm">
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span className="text-gray-700 dark:text-gray-300">
+                      {strength}
+                    </span>
+                  </div>
+                ))
               ) : (
                 <>
                   <div className="flex items-center gap-2 text-sm">
@@ -263,24 +255,22 @@ export default function SummaryRight({
             </div>
           </div>
 
-
-
-              {/* Raw Analysis Text - Show when structured data is not available */}
-              {!isStructured && typeof summary === "string" && (
-                <div className="bg-gradient-to-br from-gray-50 to-slate-100 dark:from-gray-800 dark:to-gray-700 rounded-xl p-4 shadow-lg border border-gray-200 dark:border-gray-600">
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="w-6 h-6 bg-gray-500 rounded-full flex items-center justify-center">
-                      <span className="text-white text-xs font-bold">📄</span>
-                    </div>
-                    <h3 className="font-semibold text-gray-900 dark:text-white">
-                      AI Analysis
-                    </h3>
-                  </div>
-                  <div className="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-wrap">
-                    {summary}
-                  </div>
+          {/* Raw Analysis Text - Show when structured data is not available */}
+          {!isStructured && typeof summary === "string" && (
+            <div className="bg-gradient-to-br from-gray-50 to-slate-100 dark:from-gray-800 dark:to-gray-700 rounded-xl p-4 shadow-lg border border-gray-200 dark:border-gray-600">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-6 h-6 bg-gray-500 rounded-full flex items-center justify-center">
+                  <span className="text-white text-xs font-bold">📄</span>
                 </div>
-              )}
+                <h3 className="font-semibold text-gray-900 dark:text-white">
+                  AI Analysis
+                </h3>
+              </div>
+              <div className="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-wrap">
+                {summary}
+              </div>
+            </div>
+          )}
         </div>
       ) : error ? (
         <div className="bg-gradient-to-br from-red-50 to-pink-100 dark:from-gray-900 dark:to-gray-800 rounded-xl border border-red-200 dark:border-gray-700 p-8 shadow-lg">
@@ -315,4 +305,4 @@ export default function SummaryRight({
       ) : null}
     </div>
   );
-} 
+}

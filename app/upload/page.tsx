@@ -4,10 +4,11 @@ import React, { useState } from "react";
 import { FileUpload } from "@/components/ui/file-upload";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Button, } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
+  
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Home, CheckCircle, AlertCircle, LoaderCircle } from "lucide-react";
@@ -20,9 +21,9 @@ export default function Page() {
   const [jobTitle, setJobTitle] = useState("");
   const [isUploading, setIsUploading] = useState(false);
   const [uploadStatus, setUploadStatus] = useState<{
-    type: 'success' | 'error' | null;
+    type: "success" | "error" | null;
     message: string;
-  }>({ type: null, message: '' });
+  }>({ type: null, message: "" });
 
   const handleFileUpload = async (files: File[]) => {
     setFiles(files);
@@ -35,14 +36,14 @@ export default function Page() {
 
   const uploadFile = async (file: File) => {
     setIsUploading(true);
-    setUploadStatus({ type: null, message: '' });
+    setUploadStatus({ type: null, message: "" });
 
     try {
       const formData = new FormData();
-      formData.append('file', file);
+      formData.append("file", file);
 
-      const response = await fetch('/api/upload', {
-        method: 'POST',
+      const response = await fetch("/api/upload", {
+        method: "POST",
         body: formData,
       });
 
@@ -50,28 +51,30 @@ export default function Page() {
 
       if (response.ok) {
         setUploadStatus({
-          type: 'success',
-          message: 'File uploaded successfully!'
+          type: "success",
+          message: "File uploaded successfully!",
         });
-        // Redirect to summary page
-        setTimeout(() => {
-          router.push(`/summary?jobTitle=${encodeURIComponent(jobTitle)}`);
-        }, 2000);
       } else {
         setUploadStatus({
-          type: 'error',
-          message: result.error || 'Upload failed'
+          type: "error",
+          message: result.error || "Upload failed",
         });
       }
     } catch (error) {
-      console.error('Upload error:', error);
+      console.error("Upload error:", error);
       setUploadStatus({
-        type: 'error',
-        message: 'Network error occurred'
+        type: "error",
+        message: "Network error occurred",
       });
     } finally {
       setIsUploading(false);
     }
+  };
+  const redirectToSummary = () => {
+    // Redirect to summary page
+    setTimeout(() => {
+      router.push(`/summary?jobTitle=${encodeURIComponent(jobTitle)}`);
+    }, 2000);
   };
 
   return (
@@ -83,7 +86,11 @@ export default function Page() {
           <Tooltip>
             <TooltipTrigger asChild>
               <Link href="/">
-                <Button variant="outline" className="cursor-pointer" size="icon">
+                <Button
+                  variant="outline"
+                  className="cursor-pointer"
+                  size="icon"
+                >
                   <Home className="w-4 h-4" />
                 </Button>
               </Link>
@@ -95,7 +102,9 @@ export default function Page() {
         </div>
 
         {/* Centered Title */}
-        <h1 className="text-3xl font-bold text-center w-full">Resume Summary</h1>
+        <h1 className="text-3xl font-bold text-center w-full">
+          Resume Summary
+        </h1>
       </div>
 
       {/* Form Card */}
@@ -123,21 +132,32 @@ export default function Page() {
         {isUploading && (
           <div className="flex items-center gap-2 p-4 bg-blue-50 dark:bg-blue-950 rounded-lg">
             <LoaderCircle className="w-4 h-4 animate-spin text-blue-600" />
-            <span className="text-blue-700 dark:text-blue-300">Uploading file...</span>
+            <span className="text-blue-700 dark:text-blue-300">
+              Uploading file...
+            </span>
           </div>
         )}
 
-        {uploadStatus.type === 'success' && (
+        {uploadStatus.type === "success" && (
           <div className="flex items-center gap-2 p-4 bg-green-50 dark:bg-green-950 rounded-lg">
             <CheckCircle className="w-4 h-4 text-green-600" />
-            <span className="text-green-700 dark:text-green-300">{uploadStatus.message}</span>
+            <span className="text-green-700 dark:text-green-300">
+              {uploadStatus.message}
+            </span>
           </div>
         )}
+        {uploadStatus.type === "success" && (
+          <Button onClick={() => redirectToSummary()}>
+            Summarize the things
+          </Button>
+        )}
 
-        {uploadStatus.type === 'error' && (
+        {uploadStatus.type === "error" && (
           <div className="flex items-center gap-2 p-4 bg-red-50 dark:bg-red-950 rounded-lg">
             <AlertCircle className="w-4 h-4 text-red-600" />
-            <span className="text-red-700 dark:text-red-300">{uploadStatus.message}</span>
+            <span className="text-red-700 dark:text-red-300">
+              {uploadStatus.message}
+            </span>
           </div>
         )}
       </div>

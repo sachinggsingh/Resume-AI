@@ -14,7 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import SummaryLeft from "@/components/Summary-left";
-import SummaryRight from "@/components/Summary-right";
+import SummaryWrapper from "@/components/Summary-right-wrapper";
 
 interface AnalysisData {
   atsScore: number;
@@ -231,7 +231,7 @@ export default function Page() {
         />
 
         {/* Right Side - Summary Section */}
-        <SummaryRight
+        <SummaryWrapper
           loading={loading}
           error={error}
           summary={summary}
