@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
       .map((msg: { role: string; content: string }) => `${msg.role === 'user' ? 'User' : 'Assistant'}: ${msg.content}`)
       .join('\n');
 
-    const prompt = `You are an AI Resume Assistant specializing in helping users with resume optimization, job applications, and career advice. 
+    const prompt = `You are an AI Resume Assistant specializing in helping users with resume optimization, job applications, and career advice. You aim to provide clear, concise, and actionable responses to user queries. 
 
 Your expertise includes:
 - Resume writing and formatting tips
